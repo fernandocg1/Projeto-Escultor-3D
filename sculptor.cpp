@@ -87,9 +87,9 @@ void Sculptor :: cutVoxel(int mx, int my, int mz){
 // implementação de um cubo
 
 void Sculptor :: putBox(int x0, int x1, int y0, int y1, int z0, int z1){
-    for(int i = 0;i < x1; i++){
-        for(int j = 0; j < y1; j++){
-            for(int k = 0; k < z1; k++){
+    for(int i = x0;i <= x1; i++){
+        for(int j = y0; j <= y1; j++){
+            for(int k = z0; k <= z1; k++){
                 v[i][j][k].show = true;
                 v[i][j][k].r = r;
                 v[i][j][k].g = g;
@@ -125,7 +125,7 @@ void Sculptor :: putSphere(int xcenter, int ycenter, int zcenter, int radius){
                 y2 = (double)(j-ycenter) * (double)(j-ycenter);
                 z2 = (double)(k-zcenter) * (double)(k-zcenter);
 
-                if(x2 + y2 + z2 < (r*r)){
+                if(x2 + y2 + z2 < (double)radius * radius){
                     v[i][j][k].show = true;
                     v[i][j][k].r = r;
                     v[i][j][k].g = g;
@@ -205,7 +205,6 @@ void Sculptor :: cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int
 
 void Sculptor :: writeOFF(const char* filename){
     std::ofstream file;
-    file.open(filename);
 
     std::fixed(file);
 
@@ -234,7 +233,9 @@ void Sculptor :: writeOFF(const char* filename){
         }
     }
 
-    file << NVertices << NFaces << std :: endl;
+    file << NVertices << " " << NFaces << " " << 0 << std :: endl;
+
+    file << std::fixed;
 
     for(int i = 0; i < nx; i++){
         for(int j = 0; j < ny; j++){
