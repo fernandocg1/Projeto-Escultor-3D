@@ -201,6 +201,94 @@ void Sculptor :: cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int
     }
 }
 
+// criando o arquivo .OFF
+
+void Sculptor :: writeOFF(const char* filename){
+    std::ofstream file;
+    file.open(filename);
+
+    std::fixed(file);
+
+    int NVertices = 0;
+    int NFaces = 0;
+    int NArestas = 0;
+    file.open(filename);
+
+    if(file.is_open()){
+        std::cout << "O Arquivo foi aberto" << std :: endl;
+    }else{
+        std :: cout << "O Arquivo .OFF não foi aberto" << std :: endl;
+        exit(1);
+    }
+
+    file << "OFF" << std :: endl;
+
+    for(int i = 0; i < nx; i++){
+        for(int j = 0; j < ny; j++){
+            for( int k = 0; k < nz; k++){
+                if(v[i][j][k].show == true){
+                    NVertices = NVertices + 8;
+                    NFaces = NFaces + 6;
+                }
+            }
+        }
+    }
+
+    file << NVertices << NFaces << std :: endl;
+
+    for(int i = 0; i < nx; i++){
+        for(int j = 0; j < ny; j++){
+            for( int k = 0; k < nz; k++){
+                if(v[i][j][k].show == true){
+                    file << i-0.5 << " " << j+0.5 << " " << k-0.5 << std :: endl;
+                    file << i-0.5 << " " << j-0.5 << " " << k-0.5 << std :: endl;
+                    file << i+0.5 << " " << j-0.5 << " " << k-0.5 << std :: endl;
+                    file << i+0.5 << " " << j+0.5 << " " << k-0.5 << std :: endl;
+                    file << i-0.5 << " " << j+0.5 << " " << k+0.5 << std :: endl;
+                    file << i-0.5 << " " << j-0.5 << " " << k+0.5 << std :: endl;
+                    file << i+0.5 << " " << j-0.5 << " " << k+0.5 << std :: endl;
+                    file << i+0.5 << " " << j+0.5 << " " << k+0.5 << std :: endl;
+                }
+            }
+        }
+    }
+
+    int aux = 0;
+
+    for(int i = 0; i < nx; i++){
+        for(int j = 0; j < ny; j++){
+            for( int k = 0; k < nz; k++){
+                if(v[i][j][k].show == true){
+                    file << 4 << " " << aux+0 << " " << aux+3 << " " << aux+2 << " " << aux+1 << " " << v[i][j][k].r << " "
+                         << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std :: endl;
+
+                    file << 4 << " " << aux+4 << " " << aux+5 << " " << aux+6 << " " << aux+7 << " " << v[i][j][k].r << " "
+                         << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std :: endl;
+
+                    file << 4 << " " << aux+0 << " " << aux+1 << " " << aux+5 << " " << aux+4 << " " << v[i][j][k].r << " "
+                         << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std :: endl;
+
+                    file << 4 << " " << aux+0 << " " << aux+4 << " " << aux+7 << " " << aux+3 << " " << v[i][j][k].r << " "
+                         << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std :: endl;
+
+                    file << 4 << " " << aux+3 << " " << aux+7 << " " << aux+6 << " " << aux+2 << " " << v[i][j][k].r << " "
+                         << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std :: endl;
+
+                    file << 4 << " " << aux+1 << " " << aux+2 << " " << aux+6 << " " << aux+5 << " " << v[i][j][k].r << " "
+                         << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std :: endl;
+                    aux=aux+8;
+                }
+            }
+        }
+    }
+
+    if(file.is_open()){
+        std :: cout << "Arquivo.OFF salvo!" << std :: endl;
+    }
+    file.close();
+}
+
+
 
 
 
