@@ -1,0 +1,8 @@
+# Ignorar pastas de configuração e build
+.qtcreator/
+build*/
+
+# Ignorar arquivos de usuário e resultados
+*.user
+*.off
+*.exe
