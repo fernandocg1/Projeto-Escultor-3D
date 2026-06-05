@@ -104,9 +104,9 @@ void Sculptor :: putBox(int x0, int x1, int y0, int y1, int z0, int z1){
 
 void Sculptor :: cutBox(int x0, int x1, int y0, int y1, int z0, int z1){
 
-    for(int i = 0;i < x1; i++){
-        for(int j = 0; j < y1; j++){
-            for(int k = 0; k < z1; k++){
+    for(int i = 0;i <= x1; i++){
+        for(int j = 0; j <= y1; j++){
+            for(int k = 0; k <= z1; k++){
                 v[i][j][k].show = false;
             }
         }
