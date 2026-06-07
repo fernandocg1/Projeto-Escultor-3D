@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include <cstdlib>
 #include "sculptor.h"
 
@@ -81,6 +80,15 @@ int main() {
     draw.setColor(1.0, 1.0, 0.0, 1.0);
     draw.putBox(39, 43, 18, 22, 32, 32);
     draw.putBox(39, 43, 18, 22, 18, 18);
+    draw.cutVoxel(39, 18, 32);
+    draw.cutVoxel(39, 22, 32);
+    draw.cutVoxel(43, 18, 32);
+    draw.cutVoxel(43, 22, 32);
+    draw.cutVoxel(39, 18, 18);
+    draw.cutVoxel(39, 22, 18);
+    draw.cutVoxel(43, 18, 18);
+    draw.cutVoxel(43, 22, 18);
+    draw.cutBox(39, 43, 18, 22, 16, 16);
 
 
     draw.writeOFF("Roblox.off");
